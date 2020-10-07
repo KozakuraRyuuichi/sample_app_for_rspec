@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     # sequence(:email) { |n| "user#{n}@gmail.com"}からの書き換え
-    sequence(:email, "user1@gmail.com")
+    sequence(:email, "user1@sample.com")
     password {"password"}
     password_confirmation {"password"}
   end
