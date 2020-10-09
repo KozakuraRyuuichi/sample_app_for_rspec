@@ -34,7 +34,7 @@ RSpec.describe Task, type: :model do
     # 別のタイトルで有効であること
     it "is valid with another title" do
       task = create(:task)
-      task_with_another_title = build(:task, title: "title2")
+      task_with_another_title = build(:task, title: "another_title")
       expect(task_with_another_title).to be_valid
       expect(task_with_another_title.errors).to be_empty
     end
