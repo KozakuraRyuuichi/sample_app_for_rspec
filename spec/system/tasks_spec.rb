@@ -90,13 +90,14 @@ RSpec.describe 'Tasks', type: :system do
 
       context 'フォームの入力値が正常' do
         it 'タスク編集に成功する' do
-          # visit edit_task_path(task.id)
-          click_on 'Edit'
-          fill_in 'Title', with: task.title
+          fill_in 'Title', with: 'update_title'
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
           click_button 'Update Task'
-          expect(current_path).to eq task_path(user.id)
+          expect(current_path).to eq task_path(task)
+          expect(page).to have_content 'Title: update_title'
+          expect(page).to have_content 'Content: update_content'
+          expect(page).to have_content 'Status: todo'
           expect(page).to have_content("Task was successfully updated.")
         end
       end
