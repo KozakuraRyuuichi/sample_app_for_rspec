@@ -41,9 +41,8 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    let!(:task) { create(:task, user: user) }
-    let(:other_task) { create(:task, user: user) }
     before { login(user) }
+
     describe 'タスク作成' do
       context 'タイトルが未入力' do
         it 'タスク作成に失敗する' do
@@ -70,6 +69,9 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     describe 'タスク編集' do
+      let!(:task) { create(:task, user: user) }
+      let(:other_task) { create(:task, user: user) }
+      before { visit edit_task_path(task) }
 
       context 'フォームの入力値が正常' do
         it 'タスク編集に成功する' do
