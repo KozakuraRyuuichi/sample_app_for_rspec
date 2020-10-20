@@ -107,7 +107,7 @@ RSpec.describe 'Tasks', type: :system do
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
           click_button 'Update Task'
-          expect(current_path).to eq task_path(user.id)
+          expect(current_path).to eq task_path(task)
           expect(page).to have_content("Title can't be blank")
         end
       end
@@ -117,7 +117,7 @@ RSpec.describe 'Tasks', type: :system do
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
           click_button 'Update Task'
-          expect(current_path).to eq task_path(user.id)
+          expect(current_path).to eq task_path(task)
           expect(page).to have_content("Title has already been taken")
         end
       end
