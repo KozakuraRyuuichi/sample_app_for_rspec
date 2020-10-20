@@ -103,11 +103,6 @@ RSpec.describe 'Tasks', type: :system do
       end
       context 'タイトルが未入力' do
         it 'タスク作成に失敗するる' do
-          visit login_path
-          fill_in 'Email', with: user.email
-          fill_in 'Password', with: 'password'
-          click_button 'Login'
-          click_on 'Edit'
           fill_in 'Title', with: ''
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
@@ -118,11 +113,6 @@ RSpec.describe 'Tasks', type: :system do
       end
       context 'タイトルが重複' do
         it 'タスク作成に失敗するる' do
-          visit login_path
-          fill_in 'Email', with: user.email
-          fill_in 'Password', with: 'password'
-          click_button 'Login'
-          click_on 'Edit'
           fill_in 'Title', with: other_task.title
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
@@ -135,12 +125,9 @@ RSpec.describe 'Tasks', type: :system do
 
     describe 'タスク削除' do
       let!(:task) {create(:task, user: user)}
+
       context '自分のタスク' do
         it '削除できること' do
-          visit login_path
-          fill_in 'Email', with: user.email
-          fill_in 'Password', with: 'password'
-          click_button 'Login'
           click_on 'Destroy'
           page.driver.browser.switch_to.alert.accept
           expect(current_path).to eq tasks_path
