@@ -10,6 +10,7 @@ RSpec.describe 'Tasks', type: :system do
         tasks = create_list(:task, 3)
         visit tasks_path
         # ここに関して質問する
+        binding.pry
         expect(page).to have_content tasks[0].title
         expect(page).to have_content tasks[1].title
         expect(page).to have_content tasks[2].title
@@ -39,6 +40,8 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
+    let!(:task) { create(:task, user: user) }
+    let(:other_task) { create(:task, user: user) }
     before { login(user) }
     describe 'タスク作成' do
       context 'タイトルが未入力' do
@@ -66,12 +69,11 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     describe 'タスク編集' do
-      let!(:task) { create(:task, user: user) }
-      let(:other_task) { create(:task, user: user) }
 
       context 'フォームの入力値が正常' do
         it 'タスク編集に成功する' do
-          visit edit_task_path(task.id)
+          # visit edit_task_path(task.id)
+          click_on 'Edit'
           fill_in 'Title', with: task.title
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
