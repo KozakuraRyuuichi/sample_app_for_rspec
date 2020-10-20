@@ -132,10 +132,12 @@ RSpec.describe 'Tasks', type: :system do
 
       context '自分のタスク' do
         it '削除できること' do
+          visit tasks_path
           click_on 'Destroy'
           page.driver.browser.switch_to.alert.accept
           expect(current_path).to eq tasks_path
           expect(page).to have_content('Task was successfully destroyed.')
+          expect(page).not_to have_content task.title
         end
       end
     end
