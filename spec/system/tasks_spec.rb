@@ -5,12 +5,11 @@ RSpec.describe 'Tasks', type: :system do
   let(:task) { create(:task, user: user) }
 
   describe 'ログイン前' do
-    describe 'ページ遷移確認'
+    describe 'ページ遷移確認' do
       context 'タスク一覧にアクセス' do
         it 'タスク一覧が表示される'  do
           tasks = create_list(:task, 3)
           visit tasks_path
-          binding.pry
           expect(page).to have_content tasks[0].title
           expect(page).to have_content tasks[1].title
           expect(page).to have_content tasks[2].title
