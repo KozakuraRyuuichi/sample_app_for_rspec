@@ -67,6 +67,7 @@ RSpec.describe 'Tasks', type: :system do
           select 'todo', from: 'Status'
           click_button 'Create Task'
           expect(current_path).to eq tasks_path
+          expect(page).to have_content '1 error prohibited this task from being saved'
           expect(page).to have_content("Title can't be blank")
         end
       end
@@ -78,6 +79,7 @@ RSpec.describe 'Tasks', type: :system do
           select 'todo', from: 'Status'
           click_button 'Create Task'
           expect(current_path).to eq tasks_path
+          expect(page).to have_content '1 error prohibited this task from being saved'
           expect(page).to have_content("Title has already been taken")
         end
       end
@@ -108,6 +110,7 @@ RSpec.describe 'Tasks', type: :system do
           select 'todo', from: 'Status'
           click_button 'Update Task'
           expect(current_path).to eq task_path(task)
+          expect(page).to have_content '1 error prohibited this task from being saved'
           expect(page).to have_content("Title can't be blank")
         end
       end
@@ -118,6 +121,7 @@ RSpec.describe 'Tasks', type: :system do
           select 'todo', from: 'Status'
           click_button 'Update Task'
           expect(current_path).to eq task_path(task)
+          expect(page).to have_content '1 error prohibited this task from being saved'
           expect(page).to have_content("Title has already been taken")
         end
       end
