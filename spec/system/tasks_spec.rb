@@ -5,36 +5,38 @@ RSpec.describe 'Tasks', type: :system do
   let(:task) { create(:task, user: user) }
 
   describe 'ログイン前' do
-    context 'タスク一覧にアクセス' do
-      it 'タスク一覧が表示される'  do
-        tasks = create_list(:task, 3)
-        visit tasks_path
-        # ここに関して質問する
-        binding.pry
-        expect(page).to have_content tasks[0].title
-        expect(page).to have_content tasks[1].title
-        expect(page).to have_content tasks[2].title
+    describe 'ページ遷移確認'
+      context 'タスク一覧にアクセス' do
+        it 'タスク一覧が表示される'  do
+          tasks = create_list(:task, 3)
+          visit tasks_path
+          # ここに関して質問する
+          binding.pry
+          expect(page).to have_content tasks[0].title
+          expect(page).to have_content tasks[1].title
+          expect(page).to have_content tasks[2].title
+        end
       end
-    end
-    context 'タスク詳細にアクセス' do
-      it 'タスクの詳細が表示される' do
-        visit task_path(task.id)
-        expect(page).to have_content(task.title)
-        expect(page).to have_content(task.content)
+      context 'タスク詳細にアクセス' do
+        it 'タスクの詳細が表示される' do
+          visit task_path(task.id)
+          expect(page).to have_content(task.title)
+          expect(page).to have_content(task.content)
+        end
       end
-    end
-    context 'タスクの新規登録ページにアクセス' do
-      it '新規登録ページへのアクセスに失敗する' do
-        visit new_task_path
-        expect(current_path).to eq login_path
-        expect(page).to have_content('Login required')
+      context 'タスクの新規登録ページにアクセス' do
+        it '新規登録ページへのアクセスに失敗する' do
+          visit new_task_path
+          expect(current_path).to eq login_path
+          expect(page).to have_content('Login required')
+        end
       end
-    end
-    context 'タスクの編集ページにアクセス' do
-      it '編集ページへのアクセスに失敗する' do
-        visit edit_task_path(task.id)
-        expect(current_path).to eq login_path
-        expect(page).to have_content('Login required')
+      context 'タスクの編集ページにアクセス' do
+        it '編集ページへのアクセスに失敗する' do
+          visit edit_task_path(task.id)
+          expect(current_path).to eq login_path
+          expect(page).to have_content('Login required')
+        end
       end
     end
   end
