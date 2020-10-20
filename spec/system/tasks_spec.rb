@@ -10,11 +10,11 @@ RSpec.describe 'Tasks', type: :system do
         it 'タスク一覧が表示される'  do
           tasks = create_list(:task, 3)
           visit tasks_path
-          # ここに関して質問する
           binding.pry
           expect(page).to have_content tasks[0].title
           expect(page).to have_content tasks[1].title
           expect(page).to have_content tasks[2].title
+          expect(current_path).to eq tasks_path
         end
       end
       context 'タスク詳細にアクセス' do
