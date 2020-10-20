@@ -44,6 +44,21 @@ RSpec.describe 'Tasks', type: :system do
     before { login(user) }
 
     describe 'タスク作成' do
+      context 'フォームの入力値が正常' do
+        it 'タスクの新規作成が成功する' do
+          visit new_task_path
+          fill_in 'Title', with: 'test_title'
+          fill_in 'Content', with: 'test_content'
+          select 'doing', from: 'Status'
+          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
+          click_button 'Create Task'
+          expect(page).to have_content 'Title: test_title'
+          expect(page).to have_content 'Content: test_content'
+          expect(page).to have_content 'Status: doing'
+          expect(page).to have_content 'Deadline: 2020/6/1 10:30'
+          expect(current_path).to eq '/tasks/1'
+        end
+      end
       context 'タイトルが未入力' do
         it 'タスク作成に失敗する' do
           click_on 'New Task'
