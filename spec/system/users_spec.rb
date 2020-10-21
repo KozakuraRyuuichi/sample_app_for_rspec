@@ -24,6 +24,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'Password', with: 'password'
           fill_in 'Password confirmation', with: 'password'
           click_button 'SignUp'
+          expect(page).to have_content '1 error prohibited this user from being saved'
           expect(page).to have_content("Email can't be blank")
           expect(current_path).to eq users_path
         end
@@ -35,6 +36,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'Password', with: 'password'
           fill_in 'Password confirmation', with: 'password'
           click_button 'SignUp'
+          expect(page).to have_content '1 error prohibited this user from being saved'
           expect(page).to have_content("Email has already been taken")
           expect(current_path).to eq users_path
         end
@@ -77,6 +79,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'Password', with: 'new_password'
           fill_in 'Password confirmation', with: 'new_password'
           click_button 'Update'
+          expect(page).to have_content '1 error prohibited this user from being saved'
           expect(page).to have_content("Email can't be blank")
           expect(current_path).to eq user_path(user.id)
         end
@@ -93,6 +96,7 @@ RSpec.describe 'Users', type: :system do
           fill_in 'Password', with: 'new_password'
           fill_in 'Password confirmation', with: 'new_password'
           click_button 'Update'
+          expect(page).to have_content '1 error prohibited this user from being saved'
           expect(page).to have_content("Email has already been taken")
           expect(current_path).to eq user_path(user.id)
         end
@@ -112,9 +116,6 @@ RSpec.describe 'Users', type: :system do
     end
 
     describe 'マイページ' do
-      # before do
-      #   let(:task) { create(:task) }
-      # end
       context 'タスクを作成' do
         it '新規作成したタスクが表示される' do
           visit user_path(user)
