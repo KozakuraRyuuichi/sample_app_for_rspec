@@ -61,10 +61,7 @@ RSpec.describe 'Users', type: :system do
     describe 'ユーザー編集' do
       context 'フォームの入力値が正常' do
         it 'ユーザーの編集が成功する' do
-          expect(current_path).to eq root_path
-          expect(page).to have_content("Login successful")
-          click_on 'Mypage'
-          click_on 'Edit'
+          visit edit_user_path(user)
           fill_in 'Email', with: user.email
           fill_in 'Password', with: 'update_password'
           fill_in 'Password confirmation', with: 'update_password'
@@ -75,8 +72,7 @@ RSpec.describe 'Users', type: :system do
       end
       context 'メールアドレスが未入力' do
         it 'ユーザーの編集が失敗する' do
-          click_on 'Mypage'
-          click_on 'Edit'
+          visit edit_user_path(user)
           fill_in 'Email', with: ''
           fill_in 'Password', with: 'new_password'
           fill_in 'Password confirmation', with: 'new_password'
@@ -88,6 +84,7 @@ RSpec.describe 'Users', type: :system do
       end
       context '登録済のメールアドレスを使用' do
         it 'ユーザーの編集が失敗する' do
+          visit edit_user_path(user)
           another_user = create(:user,
                                 email: 'email@example.com',
                                 password: 'another_password',
