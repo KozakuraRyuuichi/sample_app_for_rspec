@@ -85,10 +85,7 @@ RSpec.describe 'Users', type: :system do
       context '登録済のメールアドレスを使用' do
         it 'ユーザーの編集が失敗する' do
           visit edit_user_path(user)
-          another_user = create(:user,
-                                email: 'email@example.com',
-                                password: 'another_password',
-                                password_confirmation: 'another_password')
+          another_user = create(:user)
           fill_in 'Email', with: another_user.email
           fill_in 'Password', with: 'password'
           fill_in 'Password confirmation', with: 'password'
@@ -100,10 +97,7 @@ RSpec.describe 'Users', type: :system do
       end
       context '他ユーザーの編集ページにアクセス' do
         it '編集ページへのアクセスが失敗する' do
-          another_user = create(:user,
-                                email: 'email@example.com',
-                                password: 'another_password',
-                                password_confirmation: 'another_password')
+          another_user = create(:user)
           visit edit_user_path(another_user)
           expect(page).to have_content("Forbidden access.")
           expect(current_path).to eq user_path(user)
