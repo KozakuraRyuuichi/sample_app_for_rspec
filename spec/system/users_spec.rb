@@ -110,8 +110,12 @@ RSpec.describe 'Users', type: :system do
         it '新規作成したタスクが表示される' do
           create(:task, title: 'test_title', status: :todo, user: user)
           visit user_path(user)
+          expect(page).to have_content('You have 1 task.')
           expect(page).to have_content("test_title")
           expect(page).to have_content("todo")
+          expect(page).to have_link('Show')
+          expect(page).to have_link('Edit')
+          expect(page).to have_link('Destroy')
         end
       end
     end
