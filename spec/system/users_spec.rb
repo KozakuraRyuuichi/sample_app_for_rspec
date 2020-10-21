@@ -89,8 +89,6 @@ RSpec.describe 'Users', type: :system do
                                 email: 'email@example.com',
                                 password: 'another_password',
                                 password_confirmation: 'another_password')
-          click_on 'Mypage'
-          click_on 'Edit'
           fill_in 'Email', with: another_user.email
           fill_in 'Password', with: 'password'
           fill_in 'Password confirmation', with: 'password'
@@ -106,7 +104,6 @@ RSpec.describe 'Users', type: :system do
                                 email: 'email@example.com',
                                 password: 'another_password',
                                 password_confirmation: 'another_password')
-          click_on 'Mypage'
           visit edit_user_path(another_user)
           expect(page).to have_content("Forbidden access.")
           expect(current_path).to eq user_path(user)
@@ -117,8 +114,6 @@ RSpec.describe 'Users', type: :system do
     describe 'マイページ' do
       context 'タスクを作成' do
         it '新規作成したタスクが表示される' do
-          visit user_path(user)
-          click_on 'New task'
           create(:task, title: 'test_title', status: :todo, user: user)
           visit user_path(user)
           expect(page).to have_content("test_title")
