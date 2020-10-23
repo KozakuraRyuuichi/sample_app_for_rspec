@@ -1,5 +1,5 @@
 module LoginModule
-  def login(user)
+  def login_as(user)
     visit login_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password'

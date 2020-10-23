@@ -41,7 +41,7 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'ログイン後' do
-    before { login(user) }
+    before { login_as(user) }
 
     describe 'タスク作成' do
       context 'フォームの入力値が正常' do
