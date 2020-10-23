@@ -116,7 +116,7 @@ RSpec.describe 'Tasks', type: :system do
         end
       end
       context 'タイトルが重複' do
-        it 'タスク作成に失敗するる' do
+        it 'タスク作成に失敗する' do
           fill_in 'Title', with: other_task.title
           fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
