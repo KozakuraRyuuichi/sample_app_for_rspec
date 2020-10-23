@@ -68,7 +68,7 @@ RSpec.describe 'Tasks', type: :system do
           click_button 'Create Task'
           expect(current_path).to eq tasks_path
           expect(page).to have_content '1 error prohibited this task from being saved'
-          expect(page).to have_content("Title can't be blank")
+          expect(page).to have_content "Title can't be blank"
         end
       end
       context 'タイトルが重複' do
@@ -80,7 +80,7 @@ RSpec.describe 'Tasks', type: :system do
           click_button 'Create Task'
           expect(current_path).to eq tasks_path
           expect(page).to have_content '1 error prohibited this task from being saved'
-          expect(page).to have_content("Title has already been taken")
+          expect(page).to have_content 'Title has already been taken'
         end
       end
     end
@@ -100,7 +100,7 @@ RSpec.describe 'Tasks', type: :system do
           expect(page).to have_content 'Title: update_title'
           expect(page).to have_content 'Content: update_content'
           expect(page).to have_content 'Status: todo'
-          expect(page).to have_content("Task was successfully updated.")
+          expect(page).to have_content 'Task was successfully updated.'
         end
       end
       context 'タイトルが未入力' do
@@ -111,7 +111,7 @@ RSpec.describe 'Tasks', type: :system do
           click_button 'Update Task'
           expect(current_path).to eq task_path(task)
           expect(page).to have_content '1 error prohibited this task from being saved'
-          expect(page).to have_content("Title can't be blank")
+          expect(page).to have_content "Title can't be blank"
         end
       end
       context 'タイトルが重複' do
@@ -122,7 +122,7 @@ RSpec.describe 'Tasks', type: :system do
           click_button 'Update Task'
           expect(current_path).to eq task_path(task)
           expect(page).to have_content '1 error prohibited this task from being saved'
-          expect(page).to have_content("Title has already been taken")
+          expect(page).to have_content 'Title has already been taken'
         end
       end
     end
@@ -136,7 +136,7 @@ RSpec.describe 'Tasks', type: :system do
           click_on 'Destroy'
           page.driver.browser.switch_to.alert.accept
           expect(current_path).to eq tasks_path
-          expect(page).to have_content('Task was successfully destroyed.')
+          expect(page).to have_content 'Task was successfully destroyed.'
           expect(page).not_to have_content task.title
         end
       end
