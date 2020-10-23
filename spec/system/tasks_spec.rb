@@ -100,7 +100,8 @@ RSpec.describe 'Tasks', type: :system do
           expect(page).to have_content 'Title: update_title'
           expect(page).to have_content 'Content: update_content'
           expect(page).to have_content 'Status: todo'
-          expect(page).to have_content 'Task was successfully updated.'
+          expect(page).to have_content("Task was successfully updated."), "タスク更新完了のメッセージが表示されていません。"
+
         end
       end
       context 'タイトルが未入力' do
